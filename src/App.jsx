@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import './App.css'
 
@@ -10,243 +10,417 @@ import PointHistory from './PointHistory.jsx'
 function App() {
   const navigate = useNavigate()
 
-  // 사용자 목록
-  const [users, setUsers] = useState([
+  const defaultUsers = [
     { id: 1, name: '이규원', point: 8500 },
     { id: 2, name: '안민혁', point: 12000 },
     { id: 3, name: '개호두', point: 5500 }
-  ])
+  ]
 
-  // 그래프 표시 여부
-  const [showGraph, setShowGraph] = useState(false)
 
-  // 선택된 사용자
-  const [selectedId, setSelectedId] = useState('1')
+  /* 사용자 데이터 */
+  const [users, setUsers] = useState(() => {
 
-  // 포인트 적립 / 차감
-  const [pointType, setPointType] = useState('add')
+    const savedUsers =
+      localStorage.getItem('pointUsers')
 
-  // 입력 포인트
-  const [amount, setAmount] = useState('')
+    if (savedUsers) {
+      try {
+        return JSON.parse(savedUsers)
+      } catch {
+        return defaultUsers
+      }
+    }
 
-  // 결과 메시지
-  const [message, setMessage] = useState('')
+    return defaultUsers
+  })
 
-  // 포인트 변경 이력
-  const [history, setHistory] = useState([])
 
-  // 사용자 검색
-  const [searchTerm, setSearchTerm] = useState('')
+  const [showGraph, setShowGraph] =
+    useState(false)
 
-  // 사용자 정렬
-  const [sortType, setSortType] = useState('default')
+  const [selectedId, setSelectedId] =
+    useState('1')
 
-  // 로그인 정보
-  const isLogin = localStorage.getItem('isLogin')
-  const role = localStorage.getItem('role')
+  const [pointType, setPointType] =
+    useState('add')
 
-  // 관리자만 접근 가능
-  if (isLogin !== 'true' || role !== 'admin') {
+  const [amount, setAmount] =
+    useState('')
+
+  // 새 기능
+  const [reason, setReason] =
+    useState('')
+
+  const [message, setMessage] =
+    useState('')
+
+
+  /* 변경 이력 */
+  const [history, setHistory] =
+    useState(() => {
+
+      const savedHistory =
+        localStorage.getItem(
+          'pointHistory'
+        )
+
+      if (savedHistory) {
+        try {
+          return JSON.parse(
+            savedHistory
+          )
+        } catch {
+          return []
+        }
+      }
+
+      return []
+    })
+
+
+  const [searchTerm, setSearchTerm] =
+    useState('')
+
+  const [sortType, setSortType] =
+    useState('default')
+
+
+  /* 사용자 데이터 저장 */
+  useEffect(() => {
+
+    localStorage.setItem(
+      'pointUsers',
+      JSON.stringify(users)
+    )
+
+  }, [users])
+
+
+  /* 이력 저장 */
+  useEffect(() => {
+
+    localStorage.setItem(
+      'pointHistory',
+      JSON.stringify(history)
+    )
+
+  }, [history])
+
+
+  /* 로그인 권한 */
+  const isLogin =
+    localStorage.getItem('isLogin')
+
+  const role =
+    localStorage.getItem('role')
+
+  if (
+    isLogin !== 'true' ||
+    role !== 'admin'
+  ) {
     return <Navigate to="/" replace />
   }
 
-  // 전체 포인트
-  const totalPoint = users.reduce(
-    (sum, user) => sum + user.point,
-    0
-  )
 
-  // 평균 포인트
+  /* 전체 포인트 */
+  const totalPoint =
+    users.reduce(
+      (sum, user) =>
+        sum + user.point,
+      0
+    )
+
+
+  /* 평균 포인트 */
   const averagePoint =
     users.length > 0
-      ? Math.round(totalPoint / users.length)
+      ? Math.round(
+          totalPoint /
+          users.length
+        )
       : 0
 
-  // 최고 포인트 사용자
+
+  /* 최고 포인트 사용자 */
   const topUser =
     users.length > 0
-      ? users.reduce((maxUser, user) =>
-          user.point > maxUser.point
-            ? user
-            : maxUser
+      ? users.reduce(
+          (maxUser, user) =>
+            user.point >
+            maxUser.point
+              ? user
+              : maxUser
         )
       : null
 
-  // 검색
-  let displayedUsers = users.filter((user) =>
-    user.name.includes(searchTerm.trim())
-  )
 
-  // 정렬
-  displayedUsers = [...displayedUsers].sort(
-    (a, b) => {
-      if (sortType === 'high') {
-        return b.point - a.point
+  /* 검색 */
+  let displayedUsers =
+    users.filter((user) =>
+      user.name.includes(
+        searchTerm.trim()
+      )
+    )
+
+
+  /* 정렬 */
+  displayedUsers =
+    [...displayedUsers].sort(
+      (a, b) => {
+
+        if (sortType === 'high') {
+          return b.point - a.point
+        }
+
+        if (sortType === 'low') {
+          return a.point - b.point
+        }
+
+        if (sortType === 'name') {
+          return a.name.localeCompare(
+            b.name,
+            'ko'
+          )
+        }
+
+        return a.id - b.id
       }
+    )
 
-      if (sortType === 'low') {
-        return a.point - b.point
-      }
 
-      if (sortType === 'name') {
-        return a.name.localeCompare(b.name, 'ko')
-      }
-
-      return a.id - b.id
-    }
-  )
-
-  // 그래프 최대 포인트
-  const visiblePoints = displayedUsers.map(
-    (user) => user.point
-  )
+  /* 그래프 최대값 */
+  const visiblePoints =
+    displayedUsers.map(
+      (user) => user.point
+    )
 
   const maxPoint =
     visiblePoints.length > 0
       ? Math.max(
-          Math.max.apply(null, visiblePoints),
+          Math.max.apply(
+            null,
+            visiblePoints
+          ),
           1
         )
       : 1
 
-  // 현재 시간 생성
+
+  /* 시간 만들기 */
   const getCurrentTime = () => {
+
     const now = new Date()
 
-    const year = now.getFullYear()
+    const year =
+      now.getFullYear()
 
-    const month = String(
-      now.getMonth() + 1
-    ).padStart(2, '0')
+    const month =
+      String(
+        now.getMonth() + 1
+      ).padStart(2, '0')
 
-    const day = String(
-      now.getDate()
-    ).padStart(2, '0')
+    const day =
+      String(
+        now.getDate()
+      ).padStart(2, '0')
 
-    const hour = String(
-      now.getHours()
-    ).padStart(2, '0')
+    const hour =
+      String(
+        now.getHours()
+      ).padStart(2, '0')
 
-    const minute = String(
-      now.getMinutes()
-    ).padStart(2, '0')
+    const minute =
+      String(
+        now.getMinutes()
+      ).padStart(2, '0')
 
     return `${year}.${month}.${day} ${hour}:${minute}`
   }
 
-  // 포인트 적립 / 차감
-  const handlePointUpdate = () => {
-    const pointValue = Number(amount)
-    const userId = Number(selectedId)
 
-    // 입력값 확인
-    if (amount === '' || pointValue <= 0) {
+  /* 포인트 변경 */
+  const handlePointUpdate = () => {
+
+    const pointValue =
+      Number(amount)
+
+    const userId =
+      Number(selectedId)
+
+
+    if (
+      amount === '' ||
+      pointValue <= 0
+    ) {
       setMessage(
         '1 이상의 포인트를 입력하세요.'
       )
+
       return
     }
 
-    // 사용자 찾기
-    const selectedUser = users.find(
-      (user) => user.id === userId
-    )
+
+    /* 변경 사유 검사 */
+    if (
+      reason.trim() === ''
+    ) {
+      setMessage(
+        '포인트 변경 사유를 입력하세요.'
+      )
+
+      return
+    }
+
+
+    const selectedUser =
+      users.find(
+        (user) =>
+          user.id === userId
+      )
+
 
     if (!selectedUser) {
       setMessage(
         '사용자를 찾을 수 없습니다.'
       )
+
       return
     }
 
-    // 보유 포인트보다 많이 차감 방지
+
     if (
       pointType === 'subtract' &&
-      pointValue > selectedUser.point
+      pointValue >
+        selectedUser.point
     ) {
       setMessage(
         '현재 보유 포인트보다 많이 차감할 수 없습니다.'
       )
+
       return
     }
 
-    // 변경된 사용자 배열
-    const updatedUsers = users.map(
-      (user) => {
-        if (user.id !== userId) {
+
+    const updatedUsers =
+      users.map((user) => {
+
+        if (
+          user.id !== userId
+        ) {
           return user
         }
 
         let newPoint
 
-        if (pointType === 'add') {
+        if (
+          pointType === 'add'
+        ) {
           newPoint =
-            user.point + pointValue
+            user.point +
+            pointValue
         } else {
           newPoint =
-            user.point - pointValue
+            user.point -
+            pointValue
         }
 
         return {
           ...user,
           point: newPoint
         }
-      }
-    )
+      })
+
 
     setUsers(updatedUsers)
 
-    // 변경 이력 생성
+
+    /* 변경 이력 */
     const newHistory = {
+
       id: Date.now(),
+
       userId: userId,
-      name: selectedUser.name,
-      type: pointType,
-      point: pointValue,
-      time: getCurrentTime()
+
+      name:
+        selectedUser.name,
+
+      type:
+        pointType,
+
+      point:
+        pointValue,
+
+      reason:
+        reason.trim(),
+
+      time:
+        getCurrentTime()
     }
 
-    // 최신 이력이 위로 오도록 저장
-    setHistory([
-      newHistory,
-      ...history
-    ])
+
+    setHistory(
+      (prevHistory) => [
+        newHistory,
+        ...prevHistory
+      ]
+    )
+
 
     setMessage(
       '포인트가 정상적으로 반영되었습니다.'
     )
 
     setAmount('')
+
+    setReason('')
   }
 
-  // 변경 이력 삭제
+
+  /* 이력 초기화 */
   const handleClearHistory = () => {
-    if (history.length === 0) {
+
+    if (
+      history.length === 0
+    ) {
       return
     }
 
-    const isConfirm = window.confirm(
-      '포인트 변경 이력을 모두 삭제하시겠습니까?'
-    )
+    const isConfirm =
+      window.confirm(
+        '포인트 변경 이력을 모두 삭제하시겠습니까?'
+      )
 
     if (isConfirm) {
       setHistory([])
     }
   }
 
-  // 로그아웃
+
+  /* 로그아웃 */
   const handleLogout = () => {
-    localStorage.removeItem('isLogin')
-    localStorage.removeItem('role')
+
+    localStorage.removeItem(
+      'isLogin'
+    )
+
+    localStorage.removeItem(
+      'role'
+    )
+
+    localStorage.removeItem(
+      'userId'
+    )
 
     navigate('/')
   }
 
+
   return (
     <main className="admin-page">
 
-      {/* 페이지 제목 */}
-      <h1>관리자 포인트 관리</h1>
+      <h1>
+        관리자 포인트 관리
+      </h1>
 
       <p className="admin-description">
         사용자 포인트와 변경 이력을
@@ -254,40 +428,47 @@ function App() {
       </p>
 
 
-      {/* 관리자 통계 */}
+      {/* 통계 */}
       <section className="stats-grid">
 
         <div className="stat-card">
+
           <span>전체 사용자</span>
 
           <strong>
             {users.length}
             <small> 명</small>
           </strong>
+
         </div>
 
 
         <div className="stat-card">
+
           <span>전체 포인트</span>
 
           <strong>
             {totalPoint.toLocaleString()}
             <small> P</small>
           </strong>
+
         </div>
 
 
         <div className="stat-card">
+
           <span>평균 포인트</span>
 
           <strong>
             {averagePoint.toLocaleString()}
             <small> P</small>
           </strong>
+
         </div>
 
 
         <div className="stat-card">
+
           <span>최고 포인트</span>
 
           <strong className="top-user">
@@ -298,47 +479,52 @@ function App() {
 
           {topUser && (
             <small className="top-point">
-              {topUser.point.toLocaleString()} P
+
+              {topUser.point.toLocaleString()}
+              {' '}P
+
             </small>
           )}
+
         </div>
 
       </section>
 
 
-      {/* 검색 / 정렬 */}
+      {/* 검색 */}
       <section className="admin-tools">
 
         <div className="tool-group">
 
-          <label>
-            사용자 검색
-          </label>
+          <label>사용자 검색</label>
 
           <input
             type="text"
             placeholder="이름을 입력하세요"
             value={searchTerm}
             onChange={(e) =>
-              setSearchTerm(e.target.value)
+              setSearchTerm(
+                e.target.value
+              )
             }
           />
 
         </div>
 
 
-        <div className="tool-group sort-group">
+        <div className="tool-group">
 
-          <label>
-            정렬
-          </label>
+          <label>정렬</label>
 
           <select
             value={sortType}
             onChange={(e) =>
-              setSortType(e.target.value)
+              setSortType(
+                e.target.value
+              )
             }
           >
+
             <option value="default">
               기본 순서
             </option>
@@ -354,6 +540,7 @@ function App() {
             <option value="name">
               이름순
             </option>
+
           </select>
 
         </div>
@@ -369,14 +556,24 @@ function App() {
       {/* 포인트 지급 / 차감 */}
       <PointForm
         users={users}
+
         selectedId={selectedId}
         setSelectedId={setSelectedId}
+
         pointType={pointType}
         setPointType={setPointType}
+
         amount={amount}
         setAmount={setAmount}
+
+        reason={reason}
+        setReason={setReason}
+
         message={message}
-        handlePointUpdate={handlePointUpdate}
+
+        handlePointUpdate={
+          handlePointUpdate
+        }
       />
 
 
@@ -386,18 +583,20 @@ function App() {
       />
 
 
-      {/* 버튼 */}
       <div className="button-area">
 
         <button
           onClick={() =>
-            setShowGraph(!showGraph)
+            setShowGraph(
+              !showGraph
+            )
           }
         >
           {showGraph
             ? '그래프 닫기'
             : '그래프 보기'}
         </button>
+
 
         <button
           onClick={handleLogout}
@@ -408,19 +607,21 @@ function App() {
       </div>
 
 
-      {/* 그래프 */}
       {showGraph && (
+
         <PointGraph
           users={displayedUsers}
           maxPoint={maxPoint}
         />
+
       )}
 
 
-      {/* 변경 이력 */}
       <PointHistory
         history={history}
-        onClear={handleClearHistory}
+        onClear={
+          handleClearHistory
+        }
       />
 
     </main>

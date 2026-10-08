@@ -6,6 +6,8 @@ function PointForm({
   setPointType,
   amount,
   setAmount,
+  reason,
+  setReason,
   message,
   handlePointUpdate
 }) {
@@ -14,8 +16,8 @@ function PointForm({
 
       <h2>포인트 지급·차감</h2>
 
-      {/* 사용자 선택 */}
       <div className="point-form">
+
         <label>사용자 선택</label>
 
         <select
@@ -33,10 +35,12 @@ function PointForm({
             </option>
           ))}
         </select>
+
       </div>
 
-      {/* 처리 유형 */}
+
       <div className="point-form">
+
         <label>처리 유형</label>
 
         <select
@@ -53,10 +57,12 @@ function PointForm({
             포인트 차감
           </option>
         </select>
+
       </div>
 
-      {/* 포인트 입력 */}
+
       <div className="point-form">
+
         <label>포인트 입력</label>
 
         <input
@@ -68,9 +74,27 @@ function PointForm({
             setAmount(e.target.value)
           }
         />
+
       </div>
 
-      {/* 포인트 반영 */}
+
+      {/* 새 기능 */}
+      <div className="point-form">
+
+        <label>변경 사유</label>
+
+        <input
+          type="text"
+          placeholder="예: 이벤트 참여, 후기 작성"
+          value={reason}
+          onChange={(e) =>
+            setReason(e.target.value)
+          }
+        />
+
+      </div>
+
+
       <button
         className="apply-button"
         onClick={handlePointUpdate}
@@ -78,7 +102,7 @@ function PointForm({
         포인트 반영
       </button>
 
-      {/* 결과 메시지 */}
+
       {message && (
         <p className="result-message">
           {message}

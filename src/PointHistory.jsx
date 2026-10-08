@@ -8,15 +8,12 @@ function PointHistory({
       <div className="history-header">
 
         <div>
-          <h2>
-            포인트 변경 이력
-          </h2>
+          <h2>포인트 변경 이력</h2>
 
           <p>
-            최근 포인트 처리 내역입니다.
+            관리자 포인트 처리 기록입니다.
           </p>
         </div>
-
 
         <button
           className="history-clear-button"
@@ -31,8 +28,7 @@ function PointHistory({
 
       {history.length === 0 && (
         <p className="empty-history">
-          아직 포인트 변경 이력이
-          없습니다.
+          아직 포인트 변경 이력이 없습니다.
         </p>
       )}
 
@@ -55,6 +51,11 @@ function PointHistory({
             </small>
 
           </div>
+
+
+          <span className="history-reason">
+            {item.reason}
+          </span>
 
 
           <span

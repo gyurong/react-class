@@ -1,15 +1,23 @@
-/* ========================================
-   기본 설정
-======================================== */
+/* ==============================
+   기본 초기화
+============================== */
 
 * {
   box-sizing: border-box;
 }
 
-body {
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
   margin: 0;
+}
 
-  background: #f8fafc;
+body {
+  min-width: 320px;
+
+  background: #f6f8fa;
 
   font-family:
     -apple-system,
@@ -21,17 +29,16 @@ body {
 }
 
 
-/* ========================================
-   관리자 전체 페이지
-======================================== */
+/* ==============================
+   관리자 전체 영역
+============================== */
 
 .admin-page {
-  width: 100%;
-  max-width: 1000px;
+  width: calc(100% - 40px);
+  max-width: 1050px;
 
-  margin: 60px auto;
-
-  padding: 60px 55px;
+  margin: 50px auto;
+  padding: 55px;
 
   background: #ffffff;
 
@@ -39,13 +46,15 @@ body {
   border-radius: 20px;
 
   box-shadow:
-    0 8px 24px rgba(15, 23, 42, 0.05);
+    0 8px 30px rgba(15, 23, 42, 0.05);
+
+  text-align: left;
 }
 
 
-/* ========================================
-   메인 제목
-======================================== */
+/* ==============================
+   상단 제목
+============================== */
 
 .admin-page > h1 {
   margin: 0;
@@ -53,17 +62,16 @@ body {
   color: #1f2937;
 
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 750;
 
-  letter-spacing: -1px;
+  letter-spacing: -1.2px;
 
   text-align: center;
 }
 
 
-/* 제목 설명 */
 .admin-description {
-  margin: 14px 0 55px;
+  margin: 12px 0 45px;
 
   color: #94a3b8;
 
@@ -73,35 +81,38 @@ body {
 }
 
 
-/* ========================================
-   관리자 통계 카드
-======================================== */
+/* ==============================
+   통계 카드
+============================== */
 
 .stats-grid {
   display: grid;
 
   grid-template-columns:
-    repeat(4, 1fr);
+    repeat(4, minmax(0, 1fr));
 
   gap: 14px;
 
-  margin-bottom: 45px;
+  width: 100%;
+
+  margin-bottom: 40px;
 }
 
 
 .stat-card {
-  min-height: 115px;
+  min-width: 0;
+  min-height: 120px;
 
   padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   background: #f8fafc;
 
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 
@@ -116,10 +127,10 @@ body {
 
 
 .stat-card > strong {
-  color: #3f8fb4;
+  color: #428eb1;
 
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 23px;
+  font-weight: 750;
 }
 
 
@@ -136,24 +147,25 @@ body {
 
 
 .top-point {
-  margin-top: 5px;
+  margin-top: 6px;
 
-  color: #4f9fc4;
+  color: #5ba8cb;
 
   font-size: 13px;
   font-weight: 700;
 }
 
 
-/* ========================================
+/* ==============================
    검색 / 정렬
-======================================== */
+============================== */
 
 .admin-tools {
+  width: 100%;
+
   display: grid;
 
-  grid-template-columns:
-    1fr 220px;
+  grid-template-columns: 1fr 220px;
 
   gap: 14px;
 
@@ -189,15 +201,12 @@ body {
   border: 1px solid #d1d5db;
   border-radius: 9px;
 
-  color: #475569;
+  color: #374151;
 
+  font-family: inherit;
   font-size: 14px;
 
   outline: none;
-
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
 }
 
 
@@ -206,13 +215,12 @@ body {
   border-color: #8ecae6;
 
   box-shadow:
-    0 0 0 3px
-    rgba(142, 202, 230, 0.15);
+    0 0 0 3px rgba(142, 202, 230, 0.14);
 }
 
 
 .search-result {
-  margin: 8px 0 40px;
+  margin: 8px 0 35px;
 
   color: #94a3b8;
 
@@ -222,31 +230,27 @@ body {
 }
 
 
-/* ========================================
+/* ==============================
    공통 제목
-======================================== */
+============================== */
 
 .admin-page h2 {
-  margin: 0;
-
   color: #334155;
 
   font-size: 21px;
   font-weight: 700;
-
-  letter-spacing: -0.3px;
 }
 
 
-/* ========================================
-   포인트 지급·차감
-======================================== */
+/* ==============================
+   포인트 지급 / 차감
+============================== */
 
 .point-control {
-  margin-top: 10px;
-  margin-bottom: 48px;
+  width: 100%;
 
-  padding: 36px 32px;
+  margin: 0 0 45px;
+  padding: 32px;
 
   background: #f8fafc;
 
@@ -255,25 +259,21 @@ body {
 }
 
 
-/* 포인트 지급·차감 제목 */
 .point-control h2 {
-  margin-bottom: 32px;
-
-  text-align: left;
+  margin: 0 0 28px;
 }
 
 
-/* ========================================
-   입력 폼
-======================================== */
-
+/* 입력 */
 .point-form {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
 
-  gap: 8px;
+  gap: 7px;
 
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 
@@ -285,12 +285,12 @@ body {
 }
 
 
-.point-form select,
-.point-form input {
+.point-form input,
+.point-form select {
   width: 100%;
-  height: 52px;
+  height: 50px;
 
-  padding: 0 15px;
+  padding: 0 14px;
 
   background: #ffffff;
 
@@ -299,35 +299,28 @@ body {
 
   color: #374151;
 
-  font-size: 15px;
+  font-family: inherit;
+  font-size: 14px;
 
   outline: none;
-
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
 }
 
 
-.point-form select:focus,
-.point-form input:focus {
+.point-form input:focus,
+.point-form select:focus {
   border-color: #8ecae6;
 
   box-shadow:
-    0 0 0 3px
-    rgba(142, 202, 230, 0.15);
+    0 0 0 3px rgba(142, 202, 230, 0.14);
 }
 
 
-/* ========================================
-   포인트 반영 버튼
-======================================== */
-
+/* 포인트 반영 */
 .apply-button {
   width: 100%;
-  height: 52px;
+  height: 50px;
 
-  margin-top: 8px;
+  margin-top: 5px;
 
   background: #8ecae6;
 
@@ -336,36 +329,30 @@ body {
 
   color: #ffffff;
 
+  font-family: inherit;
   font-size: 15px;
   font-weight: 700;
 
   cursor: pointer;
 
-  transition:
-    background-color 0.2s,
-    transform 0.2s;
+  transition: 0.2s;
 }
 
 
 .apply-button:hover {
   background: #74b9d8;
-
-  transform: translateY(-1px);
 }
 
 
-/* ========================================
-   결과 메시지
-======================================== */
-
+/* 결과 메시지 */
 .result-message {
-  margin: 20px 0 0;
+  margin: 18px 0 0;
 
-  padding: 13px 14px;
+  padding: 12px 14px;
 
-  background: #f0f9ff;
+  background: #eef9fd;
 
-  border: 1px solid #d6eef9;
+  border: 1px solid #d4edf7;
   border-radius: 8px;
 
   color: #4285a8;
@@ -375,38 +362,39 @@ body {
 }
 
 
-/* ========================================
+/* ==============================
    사용자 목록
-======================================== */
+============================== */
 
 .user-item {
+  width: 100%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 11px;
+  gap: 20px;
 
-  padding: 18px 20px;
+  margin-bottom: 10px;
+
+  padding: 17px 20px;
 
   background: #ffffff;
 
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-
-  transition:
-    background-color 0.2s,
-    border-color 0.2s;
 }
 
 
-.user-item:hover {
-  background: #f9fcfe;
+.user-summary {
+  display: flex;
+  align-items: center;
 
-  border-color: #cce8f5;
+  gap: 10px;
 }
 
 
-.user-item span {
+.user-name {
   color: #475569;
 
   font-size: 15px;
@@ -414,7 +402,9 @@ body {
 }
 
 
-.user-item strong {
+.user-item > strong {
+  margin-left: auto;
+
   color: #4f9fc4;
 
   font-size: 15px;
@@ -423,39 +413,79 @@ body {
 
 
 .user-count {
-  margin: 18px 0 0;
+  margin: 16px 0 0;
 
   color: #94a3b8;
 
   font-size: 13px;
-  font-weight: 600;
 
   text-align: center;
 }
 
 
-/* ========================================
-   그래프 / 로그아웃 버튼
-======================================== */
+/* ==============================
+   회원 등급
+============================== */
+
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 9px;
+
+  border-radius: 7px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.4px;
+}
+
+
+.grade-badge.basic {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+
+.grade-badge.silver {
+  background: #edf7fb;
+  color: #629bb5;
+}
+
+
+.grade-badge.gold {
+  background: #fff7df;
+  color: #b48725;
+}
+
+
+.grade-badge.platinum {
+  background: #e8f7fc;
+  color: #3188af;
+}
+
+
+/* ==============================
+   버튼
+============================== */
 
 .button-area {
   display: flex;
   justify-content: center;
-  align-items: center;
 
   gap: 12px;
 
-  margin-top: 32px;
+  margin-top: 30px;
 }
 
 
 .button-area button {
-  flex: none;
-
   min-width: 120px;
-  height: 44px;
+  height: 43px;
 
-  padding: 0 20px;
+  padding: 0 18px;
 
   background: #ffffff;
 
@@ -464,22 +494,14 @@ body {
 
   color: #475569;
 
+  font-family: inherit;
   font-size: 14px;
   font-weight: 600;
 
   cursor: pointer;
-
-  white-space: nowrap;
-
-  transition:
-    background-color 0.2s,
-    border-color 0.2s,
-    color 0.2s,
-    transform 0.2s;
 }
 
 
-/* 그래프 보기 */
 .button-area button:first-child {
   background: #8ecae6;
 
@@ -491,18 +513,6 @@ body {
 
 .button-area button:first-child:hover {
   background: #74b9d8;
-
-  border-color: #74b9d8;
-
-  transform: translateY(-1px);
-}
-
-
-/* 로그아웃 */
-.button-area button:last-child {
-  background: #ffffff;
-
-  color: #475569;
 }
 
 
@@ -510,21 +520,18 @@ body {
   background: #f8fafc;
 
   border-color: #94a3b8;
-
-  color: #334155;
-
-  transform: translateY(-1px);
 }
 
 
-/* ========================================
-   그래프 영역
-======================================== */
+/* ==============================
+   그래프
+============================== */
 
 .graph-area {
-  margin-top: 45px;
+  width: 100%;
 
-  padding: 32px;
+  margin-top: 40px;
+  padding: 30px;
 
   background: #f8fafc;
 
@@ -534,7 +541,7 @@ body {
 
 
 .graph-area h2 {
-  margin-bottom: 30px;
+  margin: 0 0 28px;
 }
 
 
@@ -542,13 +549,13 @@ body {
   display: grid;
 
   grid-template-columns:
-    80px 1fr 110px;
+    90px 1fr 110px;
 
   align-items: center;
 
-  gap: 16px;
+  gap: 15px;
 
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 
@@ -569,7 +576,7 @@ body {
   width: 100%;
   height: 24px;
 
-  background: #e7eef3;
+  background: #e6edf2;
 
   border-radius: 6px;
 
@@ -577,7 +584,6 @@ body {
 }
 
 
-/* 파란색 그래프 */
 .graph-bar {
   height: 100%;
 
@@ -585,12 +591,10 @@ body {
     linear-gradient(
       90deg,
       #a9ddf2,
-      #64b5dc
+      #65b7dc
     );
 
   border-radius: 6px;
-
-  transition: width 0.4s ease;
 }
 
 
@@ -598,20 +602,20 @@ body {
   color: #3f83a5;
 
   font-size: 14px;
-  font-weight: 700;
 
   text-align: right;
 }
 
 
-/* ========================================
-   변경 이력
-======================================== */
+/* ==============================
+   포인트 변경 이력
+============================== */
 
 .history-area {
-  margin-top: 45px;
+  width: 100%;
 
-  padding: 32px;
+  margin-top: 40px;
+  padding: 30px;
 
   background: #ffffff;
 
@@ -627,12 +631,12 @@ body {
 
   gap: 20px;
 
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 
 
 .history-header h2 {
-  margin-bottom: 7px;
+  margin: 0 0 5px;
 }
 
 
@@ -645,11 +649,10 @@ body {
 }
 
 
-/* 이력 초기화 버튼 */
 .history-clear-button {
   height: 38px;
 
-  padding: 0 15px;
+  padding: 0 14px;
 
   background: #ffffff;
 
@@ -658,17 +661,10 @@ body {
 
   color: #64748b;
 
+  font-family: inherit;
   font-size: 13px;
-  font-weight: 600;
 
   cursor: pointer;
-}
-
-
-.history-clear-button:hover:not(:disabled) {
-  background: #f8fafc;
-
-  border-color: #94a3b8;
 }
 
 
@@ -679,11 +675,8 @@ body {
 }
 
 
-/* 이력 없음 */
 .empty-history {
-  margin: 0;
-
-  padding: 24px;
+  padding: 22px;
 
   background: #f8fafc;
 
@@ -697,21 +690,20 @@ body {
 }
 
 
-/* 변경 이력 한 줄 */
+/* 이력 행 */
 .history-item {
   display: grid;
 
   grid-template-columns:
-    1fr 80px 140px;
+    1fr 1.3fr 80px 130px;
 
   align-items: center;
 
   gap: 15px;
 
-  padding: 17px 4px;
+  padding: 16px 4px;
 
-  border-bottom:
-    1px solid #edf0f3;
+  border-bottom: 1px solid #edf0f3;
 }
 
 
@@ -720,12 +712,11 @@ body {
 }
 
 
-/* 사용자 + 시간 */
 .history-user {
   display: flex;
   flex-direction: column;
 
-  gap: 5px;
+  gap: 4px;
 }
 
 
@@ -744,9 +735,15 @@ body {
 }
 
 
-/* 적립 / 차감 */
+.history-reason {
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+
 .history-type {
-  padding: 5px 9px;
+  padding: 5px 8px;
 
   border-radius: 6px;
 
@@ -771,9 +768,9 @@ body {
 }
 
 
-/* 포인트 */
 .history-point {
   font-size: 14px;
+  font-weight: 700;
 
   text-align: right;
 }
@@ -789,9 +786,9 @@ body {
 }
 
 
-/* ========================================
-   모바일
-======================================== */
+/* ==============================
+   반응형
+============================== */
 
 @media (max-width: 800px) {
 
@@ -799,72 +796,44 @@ body {
     width: calc(100% - 30px);
 
     margin: 20px auto;
-
-    padding: 40px 24px;
+    padding: 35px 24px;
   }
-
 
   .admin-page > h1 {
     font-size: 29px;
   }
 
-
-  .admin-description {
-    margin-bottom: 40px;
-  }
-
-
   .stats-grid {
     grid-template-columns:
-      repeat(2, 1fr);
+      repeat(2, minmax(0, 1fr));
   }
-
 
   .admin-tools {
     grid-template-columns: 1fr;
   }
-
-
-  .search-result {
-    margin-bottom: 32px;
-  }
-
-
-  .point-control,
-  .graph-area,
-  .history-area {
-    padding: 24px;
-  }
-
-
-  .button-area {
-    flex-direction: row;
-
-    flex-wrap: wrap;
-  }
-
-
-  .graph-row {
-    grid-template-columns:
-      65px 1fr;
-  }
-
-
-  .graph-row strong {
-    grid-column: 2;
-
-    text-align: left;
-  }
-
 
   .history-item {
     grid-template-columns:
       1fr auto;
   }
 
+  .history-reason {
+    grid-column: 1 / 3;
+  }
 
   .history-point {
     grid-column: 1 / 3;
+  }
+
+  .graph-row {
+    grid-template-columns:
+      70px 1fr;
+  }
+
+  .graph-row strong {
+    grid-column: 2;
+
+    text-align: left;
   }
 }
 
@@ -875,6 +844,9 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .button-area {
+    flex-wrap: wrap;
+  }
 
   .history-header {
     flex-direction: column;
