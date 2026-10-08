@@ -8,11 +8,28 @@ function Login() {
   const users = [
     {
       id: 1,
-      email: 'user@school.ac.kr',
+      name: '이규원',
+      email: 'gyuwon@school.ac.kr',
       password: '1234',
       role: 'user'
     },
     {
+      id: 2,
+      name: '안민혁',
+      email: 'minhyuk@school.ac.kr',
+      password: '1234',
+      role: 'user'
+    },
+    {
+      id: 3,
+      name: '개호두',
+      email: 'hodu@school.ac.kr',
+      password: '1234',
+      role: 'user'
+    },
+    {
+      id: 0,
+      name: '관리자',
       email: 'admin@school.ac.kr',
       password: '1234',
       role: 'admin'
@@ -26,10 +43,13 @@ function Login() {
   const handleLogin = (e) => {
     e.preventDefault()
 
+    const inputEmail = email.trim().toLowerCase()
+    const inputPassword = password.trim()
+
     const loginUser = users.find(
       (user) =>
-        user.email === email &&
-        user.password === password
+        user.email.toLowerCase() === inputEmail &&
+        user.password === inputPassword
     )
 
     if (!loginUser) {
@@ -39,20 +59,26 @@ function Login() {
       return
     }
 
+    localStorage.removeItem('isLogin')
+    localStorage.removeItem('role')
+    localStorage.removeItem('userId')
+
     localStorage.setItem('isLogin', 'true')
     localStorage.setItem('role', loginUser.role)
 
-    if (loginUser.role === 'admin') {
-      localStorage.removeItem('userId')
-      navigate('/admin')
-    } else {
-      localStorage.setItem(
-        'userId',
-        String(loginUser.id)
-      )
+    setMessage('')
 
-      navigate('/user')
+    if (loginUser.role === 'admin') {
+      navigate('/admin')
+      return
     }
+
+    localStorage.setItem(
+      'userId',
+      String(loginUser.id)
+    )
+
+    navigate('/user')
   }
 
   return (
@@ -60,7 +86,17 @@ function Login() {
 
       <section className="login-card">
 
-        <h1>포인트 시스템 로그인</h1>
+        <div className="login-header">
+
+          <h1>
+            포인트 시스템 로그인
+          </h1>
+
+          <p>
+            사용자 또는 관리자 계정으로 로그인해주세요.
+          </p>
+
+        </div>
 
         <form
           className="login-form"
@@ -106,23 +142,77 @@ function Login() {
           </p>
         )}
 
-        <div className="login-account-info">
+        <section className="test-account-section">
 
-          <div className="account-item">
-            <span>일반 사용자</span>
-            <strong>
-              user@school.ac.kr / 1234
-            </strong>
+          <div className="test-account-header">
+
+            <h2>
+              테스트 계정
+            </h2>
+
+            <span>
+              공통 비밀번호 <strong>1234</strong>
+            </span>
+
           </div>
 
-          <div className="account-item">
-            <span>관리자</span>
-            <strong>
-              admin@school.ac.kr / 1234
-            </strong>
+
+          {/* 일반 사용자 */}
+          <div className="account-group">
+
+            <div className="account-group-title">
+
+              <span className="user-dot"></span>
+
+              일반 사용자
+
+            </div>
+
+            <div className="account-table">
+
+              <div className="account-row">
+                <strong>이규원</strong>
+                <span>gyuwon@school.ac.kr</span>
+              </div>
+
+              <div className="account-row">
+                <strong>안민혁</strong>
+                <span>minhyuk@school.ac.kr</span>
+              </div>
+
+              <div className="account-row">
+                <strong>개호두</strong>
+                <span>hodu@school.ac.kr</span>
+              </div>
+
+            </div>
+
           </div>
 
-        </div>
+
+          {/* 관리자 */}
+          <div className="account-group admin-group">
+
+            <div className="account-group-title">
+
+              <span className="admin-dot"></span>
+
+              관리자
+
+            </div>
+
+            <div className="account-table">
+
+              <div className="account-row">
+                <strong>관리자</strong>
+                <span>admin@school.ac.kr</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
 
       </section>
 

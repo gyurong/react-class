@@ -390,3 +390,103 @@
     font-size: 27px;
   }
 }
+
+/* ========================================
+   사용자 요약 카드
+======================================== */
+
+.user-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+
+.user-summary-card {
+  min-height: 100px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+
+.user-summary-card > span {
+  margin-bottom: 8px;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+.user-summary-card > strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+.summary-add {
+  color: #4f9fc4;
+}
+
+
+.summary-subtract {
+  color: #d47d98;
+}
+
+
+.summary-grade {
+  width: fit-content;
+
+  padding: 5px 9px;
+
+  border-radius: 6px;
+
+  font-size: 12px !important;
+}
+
+
+.summary-grade.basic {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+
+.summary-grade.silver {
+  background: #edf7fb;
+  color: #639bb4;
+}
+
+
+.summary-grade.gold {
+  background: #fff7df;
+  color: #b48725;
+}
+
+
+.summary-grade.platinum {
+  background: #e8f7fc;
+  color: #3188af;
+}
+
+
+@media (max-width: 700px) {
+
+  .user-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
