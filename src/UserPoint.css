@@ -1,0 +1,341 @@
+/* ========================================
+   전체 화면
+======================================== */
+
+.user-point-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 60px 30px;
+
+  background: #f8fafc;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #374151;
+
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   메인 카드
+======================================== */
+
+.user-point-card {
+  width: 100%;
+  max-width: 900px;
+
+  padding: 50px 55px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.05);
+
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   상단 영역
+======================================== */
+
+.user-point-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 30px;
+
+  margin-bottom: 38px;
+}
+
+
+/* MY POINT */
+.user-point-label {
+  margin: 0 0 7px;
+
+  color: #73b9d9;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 1.7px;
+}
+
+
+/* 메인 제목 */
+.user-point-header h1 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 36px;
+  font-weight: 700;
+
+  letter-spacing: -1px;
+}
+
+
+/* 설명 */
+.user-point-description {
+  margin: 10px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   로그아웃 버튼
+======================================== */
+
+.user-logout-button {
+  min-width: 100px;
+  height: 42px;
+
+  padding: 0 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  color: #475569;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+
+.user-logout-button:hover {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   총 포인트 박스
+======================================== */
+
+.total-point-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 40px;
+
+  padding: 30px 32px;
+
+  background: #f2f9fc;
+
+  border: 1px solid #dceff7;
+  border-radius: 14px;
+}
+
+
+/* 현재 보유 포인트 */
+.total-point-box > span {
+  color: #64748b;
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+/* 총 포인트 숫자 */
+.total-point-box > strong {
+  color: #4f9fc4;
+
+  font-size: 34px;
+  font-weight: 700;
+
+  letter-spacing: -1px;
+}
+
+
+/* P */
+.total-point-box small {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   포인트 내역 영역
+======================================== */
+
+.point-history-section {
+  width: 100%;
+}
+
+
+/* 제목 줄 */
+.section-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+
+/* 포인트 내역 제목 */
+.section-title-row h2 {
+  margin: 0;
+
+  color: #334155;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* 총 n건 */
+.section-title-row > span {
+  color: #94a3b8;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* ========================================
+   포인트 목록
+======================================== */
+
+.point-list {
+  border-top: 1px solid #e5e7eb;
+}
+
+
+/* 포인트 한 줄 */
+.point-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  min-height: 74px;
+
+  padding: 14px 4px;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+
+/* 왼쪽 정보 */
+.point-item-info {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+/* P 아이콘 */
+.point-item-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #edf8fc;
+
+  border-radius: 10px;
+
+  color: #70b7d7;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+
+/* 내역 이름 */
+.point-item-info span {
+  color: #475569;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
+/* 적립 포인트 */
+.point-item > strong {
+  color: #4f9fc4;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   모바일
+======================================== */
+
+@media (max-width: 700px) {
+
+  .user-point-page {
+    padding: 20px 15px;
+  }
+
+
+  .user-point-card {
+    padding: 35px 24px;
+
+    border-radius: 16px;
+  }
+
+
+  .user-point-header {
+    margin-bottom: 30px;
+  }
+
+
+  .user-point-header h1 {
+    font-size: 28px;
+  }
+
+
+  .user-point-description {
+    font-size: 13px;
+  }
+
+
+  .total-point-box {
+    padding: 25px 22px;
+  }
+
+
+  .total-point-box > strong {
+    font-size: 28px;
+  }
+
+
+  .user-logout-button {
+    min-width: 88px;
+  }
+}

@@ -1,0 +1,882 @@
+/* ========================================
+   기본 설정
+======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  background: #f8fafc;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  color: #374151;
+}
+
+
+/* ========================================
+   관리자 전체 페이지
+======================================== */
+
+.admin-page {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 60px auto;
+
+  padding: 60px 55px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+
+/* ========================================
+   메인 제목
+======================================== */
+
+.admin-page > h1 {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 38px;
+  font-weight: 700;
+
+  letter-spacing: -1px;
+
+  text-align: center;
+}
+
+
+/* 제목 설명 */
+.admin-description {
+  margin: 14px 0 55px;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+
+/* ========================================
+   관리자 통계 카드
+======================================== */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 14px;
+
+  margin-bottom: 45px;
+}
+
+
+.stat-card {
+  min-height: 115px;
+
+  padding: 22px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.stat-card > span {
+  margin-bottom: 10px;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.stat-card > strong {
+  color: #3f8fb4;
+
+  font-size: 24px;
+  font-weight: 700;
+}
+
+
+.stat-card strong small {
+  font-size: 14px;
+}
+
+
+.stat-card .top-user {
+  color: #334155;
+
+  font-size: 19px;
+}
+
+
+.top-point {
+  margin-top: 5px;
+
+  color: #4f9fc4;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   검색 / 정렬
+======================================== */
+
+.admin-tools {
+  display: grid;
+
+  grid-template-columns:
+    1fr 220px;
+
+  gap: 14px;
+
+  margin-bottom: 8px;
+}
+
+
+.tool-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.tool-group label {
+  color: #64748b;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.tool-group input,
+.tool-group select {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 14px;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+
+  color: #475569;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+
+.tool-group input:focus,
+.tool-group select:focus {
+  border-color: #8ecae6;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(142, 202, 230, 0.15);
+}
+
+
+.search-result {
+  margin: 8px 0 40px;
+
+  color: #94a3b8;
+
+  font-size: 12px;
+
+  text-align: right;
+}
+
+
+/* ========================================
+   공통 제목
+======================================== */
+
+.admin-page h2 {
+  margin: 0;
+
+  color: #334155;
+
+  font-size: 21px;
+  font-weight: 700;
+
+  letter-spacing: -0.3px;
+}
+
+
+/* ========================================
+   포인트 지급·차감
+======================================== */
+
+.point-control {
+  margin-top: 10px;
+  margin-bottom: 48px;
+
+  padding: 36px 32px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+
+/* 포인트 지급·차감 제목 */
+.point-control h2 {
+  margin-bottom: 32px;
+
+  text-align: left;
+}
+
+
+/* ========================================
+   입력 폼
+======================================== */
+
+.point-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 20px;
+}
+
+
+.point-form label {
+  color: #64748b;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.point-form select,
+.point-form input {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 15px;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+
+  color: #374151;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+
+.point-form select:focus,
+.point-form input:focus {
+  border-color: #8ecae6;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(142, 202, 230, 0.15);
+}
+
+
+/* ========================================
+   포인트 반영 버튼
+======================================== */
+
+.apply-button {
+  width: 100%;
+  height: 52px;
+
+  margin-top: 8px;
+
+  background: #8ecae6;
+
+  border: none;
+  border-radius: 9px;
+
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+}
+
+
+.apply-button:hover {
+  background: #74b9d8;
+
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   결과 메시지
+======================================== */
+
+.result-message {
+  margin: 20px 0 0;
+
+  padding: 13px 14px;
+
+  background: #f0f9ff;
+
+  border: 1px solid #d6eef9;
+  border-radius: 8px;
+
+  color: #4285a8;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* ========================================
+   사용자 목록
+======================================== */
+
+.user-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 11px;
+
+  padding: 18px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+
+.user-item:hover {
+  background: #f9fcfe;
+
+  border-color: #cce8f5;
+}
+
+
+.user-item span {
+  color: #475569;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
+.user-item strong {
+  color: #4f9fc4;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+.user-count {
+  margin: 18px 0 0;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+/* ========================================
+   그래프 / 로그아웃 버튼
+======================================== */
+
+.button-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 32px;
+}
+
+
+.button-area button {
+  flex: none;
+
+  min-width: 120px;
+  height: 44px;
+
+  padding: 0 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  color: #475569;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.2s;
+}
+
+
+/* 그래프 보기 */
+.button-area button:first-child {
+  background: #8ecae6;
+
+  border-color: #8ecae6;
+
+  color: #ffffff;
+}
+
+
+.button-area button:first-child:hover {
+  background: #74b9d8;
+
+  border-color: #74b9d8;
+
+  transform: translateY(-1px);
+}
+
+
+/* 로그아웃 */
+.button-area button:last-child {
+  background: #ffffff;
+
+  color: #475569;
+}
+
+
+.button-area button:last-child:hover {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+
+  color: #334155;
+
+  transform: translateY(-1px);
+}
+
+
+/* ========================================
+   그래프 영역
+======================================== */
+
+.graph-area {
+  margin-top: 45px;
+
+  padding: 32px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+
+.graph-area h2 {
+  margin-bottom: 30px;
+}
+
+
+.graph-row {
+  display: grid;
+
+  grid-template-columns:
+    80px 1fr 110px;
+
+  align-items: center;
+
+  gap: 16px;
+
+  margin-bottom: 22px;
+}
+
+
+.graph-row:last-child {
+  margin-bottom: 0;
+}
+
+
+.graph-name {
+  color: #475569;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.graph-background {
+  width: 100%;
+  height: 24px;
+
+  background: #e7eef3;
+
+  border-radius: 6px;
+
+  overflow: hidden;
+}
+
+
+/* 파란색 그래프 */
+.graph-bar {
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #a9ddf2,
+      #64b5dc
+    );
+
+  border-radius: 6px;
+
+  transition: width 0.4s ease;
+}
+
+
+.graph-row strong {
+  color: #3f83a5;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-align: right;
+}
+
+
+/* ========================================
+   변경 이력
+======================================== */
+
+.history-area {
+  margin-top: 45px;
+
+  padding: 32px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+
+.history-header h2 {
+  margin-bottom: 7px;
+}
+
+
+.history-header p {
+  margin: 0;
+
+  color: #94a3b8;
+
+  font-size: 13px;
+}
+
+
+/* 이력 초기화 버튼 */
+.history-clear-button {
+  height: 38px;
+
+  padding: 0 15px;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+
+  color: #64748b;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+.history-clear-button:hover:not(:disabled) {
+  background: #f8fafc;
+
+  border-color: #94a3b8;
+}
+
+
+.history-clear-button:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+
+/* 이력 없음 */
+.empty-history {
+  margin: 0;
+
+  padding: 24px;
+
+  background: #f8fafc;
+
+  border-radius: 8px;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+
+/* 변경 이력 한 줄 */
+.history-item {
+  display: grid;
+
+  grid-template-columns:
+    1fr 80px 140px;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 17px 4px;
+
+  border-bottom:
+    1px solid #edf0f3;
+}
+
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+
+/* 사용자 + 시간 */
+.history-user {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+
+.history-user span {
+  color: #475569;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+.history-user small {
+  color: #a0a8b3;
+
+  font-size: 11px;
+}
+
+
+/* 적립 / 차감 */
+.history-type {
+  padding: 5px 9px;
+
+  border-radius: 6px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+.history-type.add {
+  background: #edf8fc;
+
+  color: #4b9fc6;
+}
+
+
+.history-type.subtract {
+  background: #fff4f7;
+
+  color: #d47d98;
+}
+
+
+/* 포인트 */
+.history-point {
+  font-size: 14px;
+
+  text-align: right;
+}
+
+
+.history-point.add {
+  color: #4f9fc4;
+}
+
+
+.history-point.subtract {
+  color: #d47d98;
+}
+
+
+/* ========================================
+   모바일
+======================================== */
+
+@media (max-width: 800px) {
+
+  .admin-page {
+    width: calc(100% - 30px);
+
+    margin: 20px auto;
+
+    padding: 40px 24px;
+  }
+
+
+  .admin-page > h1 {
+    font-size: 29px;
+  }
+
+
+  .admin-description {
+    margin-bottom: 40px;
+  }
+
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .admin-tools {
+    grid-template-columns: 1fr;
+  }
+
+
+  .search-result {
+    margin-bottom: 32px;
+  }
+
+
+  .point-control,
+  .graph-area,
+  .history-area {
+    padding: 24px;
+  }
+
+
+  .button-area {
+    flex-direction: row;
+
+    flex-wrap: wrap;
+  }
+
+
+  .graph-row {
+    grid-template-columns:
+      65px 1fr;
+  }
+
+
+  .graph-row strong {
+    grid-column: 2;
+
+    text-align: left;
+  }
+
+
+  .history-item {
+    grid-template-columns:
+      1fr auto;
+  }
+
+
+  .history-point {
+    grid-column: 1 / 3;
+  }
+}
+
+
+@media (max-width: 500px) {
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  .history-header {
+    flex-direction: column;
+  }
+}

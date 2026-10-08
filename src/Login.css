@@ -1,0 +1,238 @@
+/* 전체 화면 */
+.login-page {
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+
+  background: #f8fafc;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  box-sizing: border-box;
+}
+
+
+/* 로그인 카드 */
+.login-card {
+  width: 100%;
+  max-width: 900px;
+
+  padding: 64px 72px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.05);
+
+  box-sizing: border-box;
+}
+
+
+/* 제목 */
+.login-card h1 {
+  margin: 0 0 40px;
+
+  color: #1f2937;
+
+  font-size: 40px;
+  font-weight: 700;
+
+  letter-spacing: -1.2px;
+}
+
+
+/* 로그인 폼 */
+.login-form {
+  width: 100%;
+}
+
+
+/* 이메일 + 비밀번호 + 로그인 */
+.login-row {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 12px;
+}
+
+
+/* 입력창 */
+.login-input {
+  flex: 1;
+
+  height: 60px;
+
+  padding: 0 18px;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+
+  color: #374151;
+
+  font-size: 17px;
+
+  outline: none;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+
+/* placeholder */
+.login-input::placeholder {
+  color: #9ca3af;
+}
+
+
+/* 입력창 클릭 */
+.login-input:focus {
+  border-color: #8ecae6;
+
+  box-shadow:
+    0 0 0 3px rgba(142, 202, 230, 0.15);
+}
+
+
+/* 로그인 버튼 */
+.login-button {
+  height: 60px;
+
+  padding: 0 30px;
+
+  background: #8ecae6;
+
+  border: none;
+  border-radius: 10px;
+
+  color: #ffffff;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  transition:
+    background-color 0.2s,
+    transform 0.2s;
+}
+
+
+/* 버튼 hover */
+.login-button:hover {
+  background: #74b9d8;
+
+  transform: translateY(-1px);
+}
+
+
+/* 로그인 실패 메시지 */
+.login-message {
+  margin: 18px 0 0;
+
+  padding: 12px 14px;
+
+  background: #fff7f9;
+
+  border: 1px solid #f5dce5;
+  border-radius: 8px;
+
+  color: #c96f8a;
+
+  font-size: 14px;
+
+  text-align: left;
+}
+
+
+/* 계정 안내 */
+.login-account-info {
+  margin-top: 44px;
+
+  padding-top: 30px;
+
+  border-top: 1px solid #e5e7eb;
+}
+
+
+/* 계정 한 묶음 */
+.account-item {
+  margin-bottom: 20px;
+}
+
+.account-item:last-child {
+  margin-bottom: 0;
+}
+
+
+/* 일반 사용자 / 관리자 */
+.account-item span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #64748b;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* 아이디 / 비밀번호 */
+.account-item strong {
+  color: #475569;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+
+/* 모바일 */
+@media (max-width: 800px) {
+
+  .login-page {
+    padding: 20px;
+  }
+
+  .login-card {
+    padding: 42px 28px;
+  }
+
+  .login-card h1 {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .login-row {
+    flex-direction: column;
+  }
+
+  .login-input {
+    width: 100%;
+  }
+
+  .login-button {
+    width: 100%;
+  }
+}
